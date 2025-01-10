@@ -1,2 +1,2 @@
 # Dogroomy
-testing database for dog grooming service
+testing database and ui for dog grooming service
