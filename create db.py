@@ -62,7 +62,21 @@ def initialize_database():
         CHECK (time != '')   -- Ensure time is not empty
     );
     ''')
-
+    # Crea tabla empleados
+    cursor.execute('''  
+    CREATE TABLE IF NOT EXISTS Employees (  
+        employee_id INTEGER PRIMARY KEY AUTOINCREMENT,  
+        username TEXT NOT NULL UNIQUE,  
+        password TEXT NOT NULL,  
+        role TEXT NOT NULL,  
+        email TEXT NOT NULL UNIQUE,  
+        CHECK (username != ''),  
+        CHECK (password != ''),  
+        CHECK (role != ''),      
+        CHECK (email != '')     
+    );  
+''')  
+    
     # Create Expenses table
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Expenses (
@@ -84,6 +98,19 @@ def initialize_database():
     except Exception as e:
         print(f"Error committing changes: {e}")
         conn.rollback()
+    try:  
+        cursor.execute('''  
+            INSERT INTO Employees (username, password, role, email)  
+            VALUES (?, ?, ?, ?);  
+        ''', ('DoGroomy', '1234', 'Supervisor', 'info-DoGroomy@gmail.com'))  
+
+        conn.commit()  # Guarda los cambios  
+        print("Empleado insertado correctamente.")  
+
+    except sqlite3.IntegrityError:  
+        print("Error: ya existe un empleado con este username o email.")  
+    except Exception as e:  
+        print(f"Ocurrió un error: {e}")  
 
     # Close the connection
     conn.close()
