@@ -42,6 +42,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def logout(self):
         self.showWindow('LoginFrame')
         self.ui.side_menu_container.setFixedWidth(0)
+        self.ui.userLabelTop.setText("")
+        self.ui.userLabelTop.setFixedWidth(0)  
+        self.ui.buttonShowMenu.setIcon(QIcon(QPixmap(u":/icons/icons/align-left.svg")))
         self.is_logged_in = False
 
 
@@ -66,6 +69,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.is_logged_in = True
             self.showWindow('scheduleFrame')
             self.slideLeftMenu()
+            self.ui.userLabelTop.setText(username)
+            self.ui.userLabelTop.setFixedWidth(16777215)  
            
         else:  
             self.ui.LoginMsjLabel.setText("Usuario o contraseña incorrectos.") 
