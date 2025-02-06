@@ -40,7 +40,7 @@ def initialize_database():
         price_id INTEGER PRIMARY KEY AUTOINCREMENT,
         service_id INTEGER NOT NULL,
         price REAL NOT NULL,
-        FOREIGN KEY (service_id) REFERENCES Services(service_id)
+        FOREIGN KEY (service_id) REFERENCES Services(service_id) ON DELETE CASCADE
     );
     ''')
 
@@ -54,10 +54,10 @@ def initialize_database():
         time TEXT NOT NULL,
         service_id INTEGER NOT NULL,
         price_id INTEGER NOT NULL,
-        FOREIGN KEY (client_id) REFERENCES Clients(client_id),
-        FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id),
-        FOREIGN KEY (service_id) REFERENCES Services(service_id),
-        FOREIGN KEY (price_id) REFERENCES Prices(price_id),
+        FOREIGN KEY (client_id) REFERENCES Clients(client_id) ON DELETE CASCADE,
+        FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id) ON DELETE CASCADE,
+        FOREIGN KEY (service_id) REFERENCES Services(service_id) ON DELETE CASCADE,
+        FOREIGN KEY (price_id) REFERENCES Prices(price_id) ON DELETE CASCADE,
         CHECK (date != ''),  -- Ensure date is not empty
         CHECK (time != '')   -- Ensure time is not empty
     );
