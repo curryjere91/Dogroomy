@@ -10,6 +10,9 @@ def initialize_database():
     CREATE TABLE IF NOT EXISTS Clients (
         client_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
+        surname TEXT NOT NULL,
+        address TEXT NOT NULL,
+        email TEXT NOT NULL,
         phone TEXT UNIQUE NOT NULL
     );
     ''')
@@ -50,8 +53,8 @@ def initialize_database():
         schedule_id INTEGER PRIMARY KEY AUTOINCREMENT,
         client_id INTEGER NOT NULL,
         dog_id INTEGER NOT NULL,
-        date TEXT NOT NULL,
-        time TEXT NOT NULL,
+        date TEXT NOT NULL CHECK(date GLOB '20??-??-??'), 
+    time TEXT NOT NULL CHECK(time GLOB '##:##'),   
         service_id INTEGER NOT NULL,
         price_id INTEGER NOT NULL,
         FOREIGN KEY (client_id) REFERENCES Clients(client_id),

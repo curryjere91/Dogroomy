@@ -1,5 +1,6 @@
 import sys
 import sqlite3
+from main_interface import *
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QFormLayout, QTabWidget,
     QLineEdit, QPushButton, QLabel, QComboBox, QMessageBox, QDateEdit, QTimeEdit, QCalendarWidget,
@@ -954,6 +955,7 @@ class CanineHaircutApp(QMainWindow):
     def add_client(self):
         name = self.client_name_input.text()
         phone = self.client_phone_input.text()
+        
 
         if name and phone:
             self.cursor.execute("INSERT INTO Clients (name, phone) VALUES (?, ?)", (name, phone))
